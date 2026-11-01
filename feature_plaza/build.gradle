@@ -1,0 +1,62 @@
+apply from:"../featureConfig.build.gradle"
+android{
+    namespace 'com.ls.feature_plaza'
+    defaultConfig {
+        if(rootProject.ext.isModule){
+            applicationId "com.ls.feature_plaza"
+        }
+    }
+}
+dependencies {
+
+//    implementation libs.appcompat
+//    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    implementation 'com.github.xiaohaibin:XBanner:androidx_v1.2.6'
+
+    annotationProcessor libs.arouterCompiler
+
+
+    implementation project(":library_base")
+    implementation project(":data_video")
+}
+
+
+
+//if(rootProject.ext.isModule){
+//    apply plugin:'com.android.application'
+//}else{
+//    apply plugin:'com.android.library'
+//}
+//
+//android {
+//    namespace 'com.ls.feature_piaza'
+//    compileSdk 34
+//
+//    defaultConfig {
+//        if(rootProject.ext.isModule){
+//            applicationId "com.ls.feature_piaza"
+//        }
+//
+//        minSdk rootProject.ext.compileSdkVersion
+//        targetSdk rootProject.ext.targetSdkVersion
+//        versionCode rootProject.ext.versionCode
+//        versionName rootProject.ext.versionName
+//
+//
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//    }
+//
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+//}

@@ -1,0 +1,67 @@
+plugins {
+    alias(libs.plugins.androidLibrary)
+}
+
+android {
+    namespace 'com.ls.librarybase'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        // 4. 集成 ARouter 路由表配置：每个模块都要写，用来生成自己模块的路由索引
+
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+        }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // 6. 集成 DataBinding (每个需要用到的模块都要显式开启)
+    dataBinding{
+        enable true
+    }
+}
+
+dependencies {
+    api libs.appcompat
+    api libs.material
+    api libs.activity
+    api libs.constraintlayout
+    api libs.arouter//引用arouter
+    api libs.liveData
+    api libs.viewModel
+    api libs.androidAutoSize
+    api libs.flycoTabLayout
+    api libs.glide
+    api libs.security
+    api libs.eventBus
+
+
+    api libs.refreshlayout
+    api libs.refreshlayoutRadar
+    api libs.refreshlayoutFooterBall
+
+    api project(":network")//引用网络库
+   // api project(":library_umeng")//引用umeng库
+    annotationProcessor libs.arouterCompiler//引用编译时注解
+
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
